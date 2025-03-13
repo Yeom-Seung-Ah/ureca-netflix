@@ -17,7 +17,7 @@ JAVA, SpringBoot, mySQL, myBatis
 
 #### 🚀front단:  공통 레이아웃/컴포넌트 만들기
 
-||Step1. Header 만들기||
+|| Step1. Header 만들기 ||
 
 🔴해결해야 하는 문제
 
@@ -33,3 +33,6 @@ JAVA, SpringBoot, mySQL, myBatis
 이때 util폴더를 만들어 get-image.js와 같은 모듈을 따로 만들어서 넣어주는게 좋다.
 
 (더 자세한 내용은 [티스토리](https://kenco.tistory.com/56)에 정리했다.)
+
+
+|| Step2. 영화 API 끌어와서 배너 만들기 ||
