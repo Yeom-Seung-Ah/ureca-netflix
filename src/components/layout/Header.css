@@ -12,3 +12,11 @@
   height: 60px; /* 원하는 높이로 조정 */
   padding: 5px 10px; /* 내부 여백 조정 */
 }
+
+/* 화면 너비가 md(768px) 이하일 때 높이 자동 조정 */
+@media (max-width: 768px) {
+  .navbar {
+    height: auto; /* 높이 자동 조정 */
+    padding: 10px; /* 작은 화면에서는 여백을 넉넉하게 */
+  }
+}
