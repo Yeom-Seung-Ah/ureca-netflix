@@ -1,0 +1,46 @@
+/* 전체 배경을 검정색으로 설정 */
+body {
+    
+   
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* 네비게이션 바 배경색과 글자색 */
+  .navbar {
+    background-color: black !important; /* Bootstrap 기본 색상 덮어쓰기 */
+    color: white;
+  }
+  
+  .navbar-brand,
+  .nav-link {
+    color: white !important; /* 글자색을 하얀색으로 설정 */
+  }
+  
+  .nav-link:hover {
+    color: #f00 !important; /* 링크 호버 시 색상 (선택 사항) */
+  }
+  
+  /* 검색 입력 필드 */
+  .form-control {
+   
+    color: white;
+    border: 1px solid white;
+  }
+  
+  /* 검색 버튼 */
+  .btn-outline-success {
+    color: red;
+    color: red;
+    border: 1px solid red;
+  }
+  
+  .btn-outline-success:hover {
+    background-color:black;
+    color: red;
+    border: red;
+  }
+  
+  #searchBtn{
+    margin-right: 10px;
+  }
