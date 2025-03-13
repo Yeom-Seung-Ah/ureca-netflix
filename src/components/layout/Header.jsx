@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import netflixLogo from "./../../assets/netflix-logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,6 +11,13 @@ import { faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Outlet } from "react-router-dom";
 
 function Header() {
+  const navigate = useNavigate(); // ✅ 네비게이션 함수 선언
+
+  // 로그인 버튼 클릭 시 실행될 함수
+  const onClickLogin = () => {
+    navigate("/login"); // "/login" 페이지로 이동
+  };
+
   return (
     <>
       <Navbar expand="md" className="bg-black">
@@ -42,7 +49,7 @@ function Header() {
               <Button variant="outline-danger" id="searchBtn" className="mx-2">
                 <FontAwesomeIcon icon={faSearch} />
               </Button>
-              <Button variant="outline-danger">
+              <Button variant="outline-danger" onClick={onClickLogin}>
                 <FontAwesomeIcon icon={faUser} />
               </Button>
             </Form>
