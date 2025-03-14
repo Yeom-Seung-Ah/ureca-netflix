@@ -35,3 +35,5 @@ back: JAVA, SpringBoot, mySQL, myBatis
 | Step5. front단 - 회원가입 시 비밀번호 암호화하기 : SHA-256 |
 
 | Step6. back단 - 회원가입/로그인 DB 구축 및 로직 구현하기 |
+
+| Step7. front단 - Header에 로그인 및 로그아웃 구현하기 |
