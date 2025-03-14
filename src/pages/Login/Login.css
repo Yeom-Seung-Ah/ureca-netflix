@@ -1,0 +1,88 @@
+
+  .login-background {
+    width: 100vw;
+    height: 100vh;
+    background: url("https://blog.kakaocdn.net/dn/dXwEao/btq1C2XPrpC/jukdVsrRqCMQaxDlQuH8G0/img.png");
+    background-size: cover;
+    background-position: center;   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+
+  .login-form-container {
+    color: white;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+    max-width: 400px; /* 최대 너비 */
+    text-align: center;
+    z-index: 10; /* 로그인 폼은 오버레이 위에 위치하도록 설정 */
+  }
+  
+  .login-logo {
+    width: 200px;
+    margin-bottom: 2rem;
+  }
+  
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #333;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 14px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 14px;
+    
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+.loginBtn:hover {
+    background-color: darkred;
+  }
+.loginBtn{
+    background-color: red;
+}
+.signupBtn{
+    background-color: #333;
+}
+.signupBtn:hover {
+  background-color: darkred;
+}
+  
+  /* 오류 메시지 */
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  /* 로그인 옵션 */
+  .login-options {
+    margin-top: 20px;
+    text-align: left;
+  }
+  
+  .login-options a {
+    color: white;
+    font-size: 12px;
+    text-decoration: none;
+  }
+  
+  .login-options a:hover {
+    text-decoration: underline;
+  }
+  

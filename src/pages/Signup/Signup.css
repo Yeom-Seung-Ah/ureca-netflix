@@ -1,0 +1,84 @@
+.signup-container {
+    width: 100vw;
+    height: 100vh;
+    background: url("https://blog.kakaocdn.net/dn/dXwEao/btq1C2XPrpC/jukdVsrRqCMQaxDlQuH8G0/img.png");
+    background-size: cover;
+    background-position: center;   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-form-container {
+    color: white;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+    max-width: 400px;
+    text-align: center;
+    z-index: 10;
+}
+
+.signup-logo {
+    width: 200px;
+    margin-bottom: 2rem;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #333;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 14px;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.signBtn:hover {
+    background-color: darkred;
+}
+
+.signBtn{
+    background-color: red;
+}
+
+.backToLoginBtn {
+    background-color: #333;
+}
+
+/* 오류 메시지 */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* 회원가입 옵션 */
+.signup-options {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.signup-options a {
+    color: white;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.signup-options a:hover {
+    text-decoration: underline;
+}

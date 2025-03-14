@@ -1,0 +1,15 @@
+.banner{
+    background-color: black;
+    height: 100vh;
+    background-position: center;
+    
+    background-repeat: no-repeat;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.banner-detail{
+    margin-bottom: 50px;
+}
