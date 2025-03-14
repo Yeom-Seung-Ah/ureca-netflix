@@ -2,7 +2,11 @@
     background-color: black;
     height: 100vh;
     background-position: center;
+<<<<<<< HEAD
     
+=======
+    background-size: 50%;
+>>>>>>> beae82bc01f968aa79fc89bc20b9a2129202afe4
     background-repeat: no-repeat;
     
     display: flex;
