@@ -7,7 +7,11 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import netflixLogo from "./../../assets/netflix-logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSearch,
+  faUser,
+  faArrowRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 import { Outlet } from "react-router-dom";
 
 function Header() {
@@ -16,6 +20,13 @@ function Header() {
   // 로그인 버튼 클릭 시 실행될 함수
   const onClickLogin = () => {
     navigate("/login"); // "/login" 페이지로 이동
+  };
+
+  const onClickLogout = () => {
+    if (confirm("로그아웃 하시겠습니까?")) {
+      sessionStorage.removeItem("user");
+      navigate("/");
+    }
   };
 
   return (
@@ -49,9 +60,24 @@ function Header() {
               <Button variant="outline-danger" id="searchBtn" className="mx-2">
                 <FontAwesomeIcon icon={faSearch} />
               </Button>
-              <Button variant="outline-danger" onClick={onClickLogin}>
+              <Button
+                variant="outline-danger"
+                className="mx-2"
+                onClick={onClickLogin}
+              >
                 <FontAwesomeIcon icon={faUser} />
               </Button>
+              {sessionStorage.getItem("user") === null ? (
+                ""
+              ) : (
+                <Button
+                  variant="danger"
+                  className="mx-2"
+                  onClick={onClickLogout}
+                >
+                  <FontAwesomeIcon icon={faArrowRightFromBracket} />
+                </Button>
+              )}
             </Form>
           </Navbar.Collapse>
         </Container>
