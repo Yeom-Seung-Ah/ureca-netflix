@@ -60,8 +60,7 @@
   width: 100%;
   padding: 12px;
   margin: 8px 0;
-  border: none; /* 기존 border 제거 */
-  box-shadow: 0 0 0 0.4px #d1d1d1; /* 0.4px 두께의 border 효과 */
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 4px;
   background: rgba(56, 66, 99, 0.6);
   color: white;
