@@ -77,6 +77,7 @@
   border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .login-box button:hover {
