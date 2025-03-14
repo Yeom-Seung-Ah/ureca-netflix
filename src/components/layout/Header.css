@@ -20,3 +20,15 @@
     padding: 10px; /* 작은 화면에서는 여백을 넉넉하게 */
   }
 }
+#p-name-wrapper {
+  display: flex;
+  align-items: center;
+}
+#p-name {
+  color: #ce4350;
+  font-weight: 500;
+  font-size: 20px;
+  margin-bottom: 0;
+  margin-right: 5px;
+  text-shadow: 2px 2px 4px rgba(220, 53, 69, 0.6);
+}

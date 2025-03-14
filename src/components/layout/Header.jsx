@@ -50,29 +50,42 @@ function Header() {
                 내가 찜한 리스트
               </Link>
             </Nav>
+            <div id="p-name-wrapper">
+              {sessionStorage.getItem("user") === null ? (
+                ""
+              ) : (
+                <p id="p-name">
+                  {JSON.parse(sessionStorage.getItem("name"))}님의 Netflix
+                </p>
+              )}
+            </div>
             <Form className="d-flex">
               <Form.Control
                 type="search"
                 placeholder="제목, 사람, 장르"
-                className="me-2 p-2 custom-search"
+                className="mx-1 p-2 custom-search"
                 bsPrefix="custom-control"
               />
-              <Button variant="outline-danger" id="searchBtn" className="mx-2">
+              <Button variant="outline-danger" id="searchBtn" className="mx-1">
                 <FontAwesomeIcon icon={faSearch} />
               </Button>
-              <Button
-                variant="outline-danger"
-                className="mx-2"
-                onClick={onClickLogin}
-              >
-                <FontAwesomeIcon icon={faUser} />
-              </Button>
+              {sessionStorage.getItem("user") === null ? (
+                <Button
+                  variant="outline-danger"
+                  className="mx-1"
+                  onClick={onClickLogin}
+                >
+                  <FontAwesomeIcon icon={faUser} />
+                </Button>
+              ) : (
+                ""
+              )}
               {sessionStorage.getItem("user") === null ? (
                 ""
               ) : (
                 <Button
                   variant="danger"
-                  className="mx-2"
+                  className="mx-1"
                   onClick={onClickLogout}
                 >
                   <FontAwesomeIcon icon={faArrowRightFromBracket} />
