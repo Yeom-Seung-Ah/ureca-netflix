@@ -22,7 +22,6 @@ back: JAVA, SpringBoot, mySQL, myBatis
 
 | Step3. front단 - 회원가입/로그인 페이지 각각 구현하기 |
 
-| Step4. back단 - 회원가입/로그인 페이지 토큰 로그인 각각 구현하기 |
 
 ✍️알아두기
 
@@ -30,7 +29,9 @@ back: JAVA, SpringBoot, mySQL, myBatis
 
 그 이유는 바로 Vite가 내부적으로 진행하는 이미지 최적화 설정때문에 그렇다. 그렇기에 이미지를 최적화할게 아니라면 public폴더에 넣어도 상관없다. 또한 이미지를 import문으로 간편하게 불러오고 싶다면 assets에 넣어야만 한다. 이때 util폴더를 만들어 get-image.js와 같은 모듈을 따로 만들어서 넣어주는게 좋다.
 
-(더 자세한 내용은 [티스토리](https://kenco.tistory.com/56)에 정리했다.)
+(더 자세한 내용 및 프로젝트 기록은 [티스토리](https://kenco.tistory.com/56). 암호는 슬랙DM주세요~!)
 
 
+### <2025.03.14>
+| Step4. back단 - 회원가입/로그인 페이지 토큰 로직 구현하기 |
 
