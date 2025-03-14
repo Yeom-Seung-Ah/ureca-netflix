@@ -34,7 +34,7 @@ function Login() {
       if (response.data.msg === "ok") {
         alert(`${response.data.name}님 환영합니다!`);
         sessionStorage.setItem("user", JSON.stringify(response.data.user)); // 세션 저장
-
+        sessionStorage.setItem("name", JSON.stringify(response.data.name));
         navigate("/"); // 메인 페이지로 이동
       } else {
         setError("이메일 또는 비밀번호를 다시 확인해주세요.");
