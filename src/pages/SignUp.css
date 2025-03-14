@@ -1,0 +1,150 @@
+.signup-background {
+  background: url("https://blog.kakaocdn.net/dn/dXwEao/btq1C2XPrpC/jukdVsrRqCMQaxDlQuH8G0/img.png");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.signup-background::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* 어두운 필터 */
+}
+
+.signup-content {
+  position: relative;
+  z-index: 2; /* 오버레이보다 위에 배치 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.signup-logo img {
+  margin-top: -80px;
+  width: 250px;
+}
+
+.signup-box {
+  position: relative;
+  z-index: 1;
+  padding: 60px;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 28vw;
+
+  color: white;
+}
+
+.signup-box h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+/* 입력 필드 스타일 */
+.signup-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+  background: rgba(56, 66, 99, 0.6);
+  color: white;
+}
+
+.signup-box input::placeholder {
+  font-weight: 100;
+  color: #d7d7d7; /* 원하는 색상 */
+  opacity: 1; /* 일부 브라우저에서 투명도를 줄이기 위해 필요 */
+}
+
+#input-confirmPassword {
+  background: rgba(133, 136, 145, 0.6);
+}
+#input-confirmPassword::placeholder {
+  color: #d7d7d7;
+}
+
+.signup-button {
+  background: #e50914;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.signup-button:hover {
+  background: #b20710;
+}
+
+.error-text {
+  color: #ff4a4a;
+  font-size: 12px;
+  margin: 4px 0 10px;
+}
+
+.error-input {
+  border: 1px solid red !important;
+  box-shadow: 0 0 5px red;
+}
+
+.signup-box p {
+  font-size: 14px;
+  color: #b3b3b3;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.signup-box p a {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.signup-button {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  background: #e50914;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.signup-button:hover {
+  background: #f40612;
+}
+
+.signup-button:disabled {
+  background: gray;
+  cursor: not-allowed;
+}
+
+.signup-button:disabled {
+  background: grey;
+}
+
+.error-text {
+  color: #ff4d4d;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.signup-content form {
+  width: 100%;
+}
+
+.error-text {
+  margin: 0 !important;
+}
