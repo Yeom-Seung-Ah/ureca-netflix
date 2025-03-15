@@ -1,5 +1,8 @@
 import React from 'react'
 import Banner from './components/Banner/Banner'
+import PopularMoviesSlide from './components/PopularMoviesSlide/PopularMoviesSlide'
+import TopRatedMoviesSlide from './components/TopRatedMoviesSlide/TopRatedMoviesSlide'
+import NowPlayingMoviesSlide from './components/NowPlayingMoviesSlide/NowPlayingMoviesSlide'
 
 // 배너 >  popular movie 의 첫번째 
 // popular movie
@@ -8,7 +11,12 @@ import Banner from './components/Banner/Banner'
 
 const Homepage = () => {
   return (
-    <div><Banner/></div>
+    <div>
+      <Banner/>
+      <PopularMoviesSlide/>
+      <TopRatedMoviesSlide/>
+      <NowPlayingMoviesSlide/>
+    </div>
   )
 }
 

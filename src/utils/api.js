@@ -4,14 +4,16 @@ const API_KEY = import.meta.env.VITE_REACT_APP_API_KEY;
 
 
 const api = axios.create({
-    baseURL:"https://api.themoviedb.org/3",
-    headers:{
-        accept: 'application/json',
-        Authorization: `Bearer ${API_KEY}`
- 
-    }
+  baseURL: "https://api.themoviedb.org/3",
+  headers: {
+    accept: "application/json",
+    Authorization: `Bearer ${API_KEY}`,
+  },
+  params: {
+    region: "KR", // 모든 요청에 자동으로 한국(region=KR) 적용!
+    language: "ko-KR", // 기본 언어도 한국어로 설정
+  },
 });
-
 // 요청 인터셉터 추가하기
 axios.interceptors.request.use(function (config) {
     // 요청이 전달되기 전에 작업 수행

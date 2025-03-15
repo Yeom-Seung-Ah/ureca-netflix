@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react'; // useEffect 추가
-=======
-import React from 'react'
->>>>>>> beae82bc01f968aa79fc89bc20b9a2129202afe4
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -11,11 +7,10 @@ import Navbar from 'react-bootstrap/Navbar';
 import './AppLayout.css';
 import { Outlet } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-<<<<<<< HEAD
 import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
-
 import logo from '../assets/netflixLogo.png';
+
 
 const AppLayout = () => {
   const navigate = useNavigate();
@@ -58,85 +53,46 @@ const AppLayout = () => {
               <Nav.Link as={Link} to="/">홈</Nav.Link>
               <Nav.Link as={Link} to="/movies">내가 찜한 리스트</Nav.Link>
             </Nav>
-            <Form className="d-flex">
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-              />
-              <Button variant="outline-danger" id="searchBtn">
-                <FontAwesomeIcon icon={faSearch} />
-              </Button>
 
-              {/* 로그인 여부에 따라 버튼을 동적으로 변경 */}
-              {userName ? (
-                <div>
-                  <span>{userName}님</span>
-                  <Button variant="outline-danger" onClick={handleLogout}>
-                    로그아웃
-                  </Button>
-                </div>
-              ) : (
-                <Button variant="outline-danger" onClick={LoginController}>
-                  <FontAwesomeIcon icon={faUser} />
-                </Button>
-              )}
-            </Form>
+            <Form className="d-flex align-items-center gap-2">
+  {/* userName이 있을 때 이름을 먼저 표시 */}
+  {userName ? (
+    <span className="me-3">{userName} 님</span>  
+  ) : null}
+
+  {/* 검색 입력 필드 */}
+  <Form.Control
+    type="search"
+    placeholder="Search"
+    className="me-2"
+    aria-label="Search"
+  />
+  
+  {/* 검색 버튼 */}
+  <Button variant="outline-danger" id="searchBtn">
+    <FontAwesomeIcon icon={faSearch} />
+  </Button>
+
+  {/* 로그인 / 로그아웃 버튼 */}
+  {userName ? (
+    <Button variant="outline-danger" className="d-inline-block logoutBtn" onClick={handleLogout}>
+      로그아웃
+    </Button>
+  ) : (
+    <Button variant="outline-danger" className="d-inline-block" onClick={LoginController}>
+      <FontAwesomeIcon icon={faUser} />
+    </Button>
+  )}
+</Form>
+
+
           </Navbar.Collapse>
         </Container>
       </Navbar>
 
-      <Outlet /> {/* 라우터 안에있는 자손들을 가져오는 컴포넌트 */}
+      <Outlet />
     </>
   );
 };
 
 export default AppLayout;
-=======
-import { faSearch,  faUser } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
-import logo from '../assets/netflixLogo.png';
-
-const AppLayout = () => {
-  return (
-    <>
-       <Navbar expand="lg" className="navbar"> {/* bg-body-tertiary 제거 */}
-
-    <Container fluid>
-    <Navbar.Brand as={Link} to="/">
-  <img src={logo} width={100} alt="Netflix Logo" />
-</Navbar.Brand>
-
-      <Navbar.Toggle aria-controls="navbarScroll" />
-      <Navbar.Collapse id="navbarScroll">
-        <Nav
-          className="me-auto my-2 my-lg-0"
-          style={{ maxHeight: '100px' }}
-          navbarScroll
-        >
-          <Nav.Link as={Link} to="/">홈</Nav.Link>
-          <Nav.Link as={Link} to="/movies">내가 찜한 리스트</Nav.Link>
-        </Nav>
-        <Form className="d-flex">
-          <Form.Control
-            type="search"
-            placeholder="Search"
-            className="me-2"
-            aria-label="Search"
-          />
-          <Button variant="outline-danger" id="searchBtn"><FontAwesomeIcon icon={faSearch} /></Button>
-          <Button variant="outline-danger"><FontAwesomeIcon icon={faUser}/></Button>
-        </Form>
-      </Navbar.Collapse>
-    </Container>
-  </Navbar>
-
-  <Outlet/> //라우터 안에있는 자손들을 가져오는 컴포넌트
-    </>
-    
-  );
-}
-
-export default AppLayout
->>>>>>> beae82bc01f968aa79fc89bc20b9a2129202afe4

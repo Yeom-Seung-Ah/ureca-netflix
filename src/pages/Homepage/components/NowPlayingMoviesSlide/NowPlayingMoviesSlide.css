@@ -1,0 +1,18 @@
+
+/* 왼쪽/오른쪽 슬라이드 버튼 크기 조정 */
+.react-multiple-carousel__arrow {
+    width: 40px !important;  /* 버튼 너비 */
+    height: 40px !important;  /* 버튼 높이 */
+    padding: 10px !important;  /* 버튼 내 여백 */
+}
+
+
+.pm{
+    background-color: black;
+    color: white;
+}
+
+.carousel-container{
+    overflow: hidden;
+    height: 440px;
+}
