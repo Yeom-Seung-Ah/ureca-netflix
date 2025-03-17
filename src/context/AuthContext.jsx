@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import sha256 from "crypto-js/sha256";
 
 // Context 생성
 const AuthContext = createContext();
@@ -21,10 +22,11 @@ const AuthProvider = ({ children }) => {
   }, [token]);
 
   const login = async (email, password) => {
+    const hashedPassword = sha256(password).toString(); // SHA-256 해싱
     try {
       const response = await axios.post("http://localhost:8080/tokenLogin", {
         userId: email,
-        userPwd: password,
+        userPwd: hashedPassword, // 해싱된 값 전송
       });
 
       if (response.data.Authorization) {
@@ -37,12 +39,22 @@ const AuthProvider = ({ children }) => {
           response.data.Authorization;
 
         navigate("/");
+        alert(`${sessionStorage.getItem("name")}님 환영합니다!`);
+        return { success: true };
       } else {
-        throw new Error("이메일 또는 비밀번호를 다시 확인해주세요.");
+        alert("이메일 또는 비밀번호를 다시 확인해주세요.");
+        return {
+          success: false,
+          message: "이메일 또는 비밀번호를 다시 확인해주세요.",
+        };
       }
     } catch (error) {
       console.error("로그인 오류:", error);
-      throw new Error("서버 오류가 발생했습니다. 다시 시도해주세요.");
+      alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
+      return {
+        success: false,
+        message: "서버 오류가 발생했습니다. 다시 시도해주세요.",
+      };
     }
   };
 

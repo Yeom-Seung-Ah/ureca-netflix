@@ -24,11 +24,10 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const result = await login(formData.email, formData.password);
 
-    try {
-      await login(formData.email, formData.password);
-    } catch (error) {
-      setError(error.message);
+    if (!result.success) {
+      alert(result.message); // 정확한 오류 메시지가 alert로 출력됨
     }
   };
 

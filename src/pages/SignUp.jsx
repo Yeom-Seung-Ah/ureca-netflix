@@ -14,25 +14,29 @@ function Signup() {
   });
 
   const [errors, setErrors] = useState({});
+  const [passwordValid, setPasswordValid] = useState(true);
+
+  const passwordPattern =
+    /^(?=.*[0-9])(?=.*[!@#$%^&*()_+\-={};':"\\|,.<>/?]).{8,}$/;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
-    // 입력 시 오류 상태 초기화
     setErrors((prevErrors) => ({ ...prevErrors, [name]: false }));
+
+    if (name === "password") {
+      setPasswordValid(passwordPattern.test(value));
+    }
   };
 
-  // 비밀번호 확인 검증을 useEffect에서 처리
   useEffect(() => {
-    if (
-      formData.confirmPassword &&
-      formData.password !== formData.confirmPassword
-    ) {
-      setErrors((prevErrors) => ({ ...prevErrors, confirmPassword: true }));
-    } else {
-      setErrors((prevErrors) => ({ ...prevErrors, confirmPassword: false }));
-    }
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      confirmPassword:
+        formData.confirmPassword &&
+        formData.password !== formData.confirmPassword,
+    }));
   }, [formData.confirmPassword, formData.password]);
 
   function sha256(message) {
@@ -43,52 +47,47 @@ function Signup() {
     e.preventDefault();
     let newErrors = {};
 
-    // 입력하지 않은 필드 감지
     Object.keys(formData).forEach((key) => {
       if (!formData[key]) newErrors[key] = true;
     });
 
-    //setErrors({...newErrors});
-    setErrors((prevErrors) => ({ ...prevErrors, newErrors }));
+    if (!passwordValid) {
+      newErrors.password = true;
+    }
 
-    if (Object.keys(errors).length === 0) {
-      const hashedPassword = sha256(formData.password);
-      const formDataToSend = {
-        userId: formData.email, // 백엔드 컬럼명에 맞게 설정
-        userPwd: hashedPassword,
-        userName: formData.name,
-      };
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = true;
+    }
 
-      try {
-        // 백엔드 API 호출 (회원가입 요청)
-        const response = await axios.post(
-          "http://localhost:8080/signup",
-          formDataToSend
-        );
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      alert("입력값이 올바르지 않습니다.");
+      return;
+    }
 
-        // 성공 처리
-        if (response.data.success) {
-          alert("회원가입이 완료되었습니다!");
+    setErrors(newErrors);
+    const hashedPassword = sha256(formData.password);
+    const formDataToSend = {
+      userId: formData.email,
+      userPwd: hashedPassword,
+      userName: formData.name,
+    };
 
-          // 입력 필드 초기화
-          setFormData({
-            name: "",
-            email: "",
-            password: "",
-            confirmPassword: "",
-          });
-
-          // 오류 메시지도 초기화
-          setErrors({});
-        } else {
-          alert(response.data.msg || "회원가입에 실패했습니다.");
-        }
-      } catch (error) {
-        console.error("회원가입 오류:", error);
-        alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/signup",
+        formDataToSend
+      );
+      if (response.data.success) {
+        alert("회원가입이 완료되었습니다!");
+        setFormData({ name: "", email: "", password: "", confirmPassword: "" });
+        setErrors({});
+      } else {
+        alert(response.data.msg || "회원가입에 실패했습니다.");
       }
-    } else {
-      alert("입력값이 올바르지않습니다.");
+    } catch (error) {
+      console.error("회원가입 오류:", error);
+      alert(error);
     }
   };
 
@@ -106,7 +105,7 @@ function Signup() {
             <input
               type="text"
               name="name"
-              placeholder={errors.name ? "이름을 입력해주세요!" : "이름"}
+              placeholder="이름"
               className={`signup-input ${errors.name ? "error-input" : ""}`}
               value={formData.name}
               onChange={handleChange}
@@ -115,11 +114,7 @@ function Signup() {
             <input
               type="text"
               name="email"
-              placeholder={
-                errors.email
-                  ? "이메일 또는 휴대폰 번호를 입력해주세요!"
-                  : "이메일 또는 휴대폰 번호"
-              }
+              placeholder="이메일 또는 휴대폰 번호"
               className={`signup-input ${errors.email ? "error-input" : ""}`}
               value={formData.email}
               onChange={handleChange}
@@ -128,23 +123,22 @@ function Signup() {
             <input
               type="password"
               name="password"
-              placeholder={
-                errors.password ? "비밀번호를 입력해주세요!" : "비밀번호"
-              }
+              placeholder="비밀번호"
               className={`signup-input ${errors.password ? "error-input" : ""}`}
               value={formData.password}
               onChange={handleChange}
             />
+            <small className="password-rule">
+              ※ 숫자, 특수문자를 포함해 8자 이상 입력하세요.
+            </small>
+            {errors.password && (
+              <p className="error-text">❗ 비밀번호 형식을 확인하세요!</p>
+            )}
 
             <input
-              id="input-confirmPassword"
               type="password"
               name="confirmPassword"
-              placeholder={
-                errors.confirmPassword
-                  ? "비밀번호가 일치하지 않습니다!"
-                  : "비밀번호 확인"
-              }
+              placeholder="비밀번호 확인"
               className={`signup-input ${
                 errors.confirmPassword ? "error-input" : ""
               }`}
@@ -152,7 +146,7 @@ function Signup() {
               onChange={handleChange}
             />
             {errors.confirmPassword && (
-              <p className="error-text">❗비밀번호가 일치하지 않습니다!</p>
+              <p className="error-text">❗ 비밀번호가 일치하지 않습니다!</p>
             )}
 
             <button type="submit" className="signup-button">
