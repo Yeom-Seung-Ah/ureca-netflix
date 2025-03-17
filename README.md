@@ -60,7 +60,7 @@ back: JAVA, SpringBoot, mySQL, myBatis
 
 | Step12. back단 - 구글 OAuth로 소셜 로그인 구현하기 |
 
-| Step13. back단 - back단 레포지토리 생성하여여 회원가입/로그인/로그아웃 기능 commit |
+| Step13. back단 - back단 레포지토리 생성하여 회원가입/로그인/로그아웃 기능 commit |
 
 | Step14. front단 - 배너 포스터 이미지에서 유튜브 영상 api로 업그레이드 하기 |
 
