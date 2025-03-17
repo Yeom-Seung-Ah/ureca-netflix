@@ -58,6 +58,8 @@ back: JAVA, SpringBoot, mySQL, myBatis
 
 | Step11. back단 - 요청 시 토큰이 갱신되게 로직 업그레이드 하기 |
 
+### <2025.03.18>
+
 | Step12. back단 - 구글 OAuth로 소셜 로그인 구현하기 |
 
 | Step13. back단 - back단 레포지토리 생성하여 회원가입/로그인/로그아웃 기능 commit |
