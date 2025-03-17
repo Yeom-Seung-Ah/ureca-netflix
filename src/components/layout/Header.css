@@ -5,7 +5,7 @@
 }
 
 .custom-search::placeholder {
-  color: rgba(255, 172, 172, 0.6); /* 플레이스홀더 글자색 */
+  color: rgba(215, 130, 130, 0.6); /* 플레이스홀더 글자색 */
 }
 
 .navbar {
@@ -25,10 +25,10 @@
   align-items: center;
 }
 #p-name {
-  color: #ce4350;
+  color: #ffffff;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 16px;
   margin-bottom: 0;
   margin-right: 5px;
-  text-shadow: 2px 2px 4px rgba(220, 53, 69, 0.6);
+  text-shadow: 2px 2px 4px rgba(255, 0, 25, 0.6);
 }

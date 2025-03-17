@@ -13,20 +13,15 @@ import {
   faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { Outlet } from "react-router-dom";
+import useAuth from "./../../context/useAuth"; // AuthContext 가져오기
 
 function Header() {
-  const navigate = useNavigate(); // ✅ 네비게이션 함수 선언
+  const navigate = useNavigate(); //  네비게이션 함수 선언
+  const { name, logout } = useAuth(); //로그인 정보 가져오기
 
   // 로그인 버튼 클릭 시 실행될 함수
   const onClickLogin = () => {
     navigate("/login"); // "/login" 페이지로 이동
-  };
-
-  const onClickLogout = () => {
-    if (confirm("로그아웃 하시겠습니까?")) {
-      sessionStorage.removeItem("user");
-      navigate("/");
-    }
   };
 
   return (
@@ -51,12 +46,10 @@ function Header() {
               </Link>
             </Nav>
             <div id="p-name-wrapper">
-              {sessionStorage.getItem("user") === null ? (
+              {sessionStorage.getItem("Authorization") === null ? (
                 ""
               ) : (
-                <p id="p-name">
-                  {JSON.parse(sessionStorage.getItem("name"))}님의 Netflix
-                </p>
+                <p id="p-name">{sessionStorage.getItem("name")}님의 NETFLIX</p>
               )}
             </div>
             <Form className="d-flex">
@@ -69,7 +62,7 @@ function Header() {
               <Button variant="outline-danger" id="searchBtn" className="mx-1">
                 <FontAwesomeIcon icon={faSearch} />
               </Button>
-              {sessionStorage.getItem("user") === null ? (
+              {sessionStorage.getItem("Authorization") === null ? (
                 <Button
                   variant="outline-danger"
                   className="mx-1"
@@ -80,14 +73,10 @@ function Header() {
               ) : (
                 ""
               )}
-              {sessionStorage.getItem("user") === null ? (
+              {sessionStorage.getItem("Authorization") === null ? (
                 ""
               ) : (
-                <Button
-                  variant="danger"
-                  className="mx-1"
-                  onClick={onClickLogout}
-                >
+                <Button variant="danger" className="mx-1" onClick={logout}>
                   <FontAwesomeIcon icon={faArrowRightFromBracket} />
                 </Button>
               )}

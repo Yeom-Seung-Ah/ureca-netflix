@@ -5,18 +5,21 @@ import Notfound from "./pages/Notfound";
 import Login from "./pages/login";
 import Signup from "./pages/SignUp";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { AuthProvider } from "./context/AuthContext"; // AuthProvider 추가
 
 function App() {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Header />}>
-          <Route index element={<Banner />} />
-        </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="*" element={<Notfound />} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Header />}>
+            <Route index element={<Banner />} />
+          </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="*" element={<Notfound />} />
+        </Routes>
+      </AuthProvider>
     </>
   );
 }

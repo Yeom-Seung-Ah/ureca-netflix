@@ -1,11 +1,11 @@
 import { useState } from "react";
+import useAuth from "./../context/useAuth";
 import "./Login.css";
 import netflixLogo from "./../assets/netflix-logo.png";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 
 function Login() {
-  const navigate = useNavigate(); // 페이지 이동을 위한 hook
+  const { login } = useAuth(); // 로그인 함수 가져오기
 
   const [formData, setFormData] = useState({
     email: "",
@@ -26,22 +26,9 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:8080/login", {
-        userId: formData.email, // 백엔드 컬럼명 맞추기
-        userPwd: formData.password,
-      });
-      console.log(response);
-      if (response.data.msg === "ok") {
-        alert(`${response.data.name}님 환영합니다!`);
-        sessionStorage.setItem("user", JSON.stringify(response.data.user)); // 세션 저장
-        sessionStorage.setItem("name", JSON.stringify(response.data.name));
-        navigate("/"); // 메인 페이지로 이동
-      } else {
-        setError("이메일 또는 비밀번호를 다시 확인해주세요.");
-      }
+      await login(formData.email, formData.password);
     } catch (error) {
-      console.error("로그인 오류:", error);
-      setError("서버 오류가 발생했습니다. 다시 시도해주세요.");
+      setError(error.message);
     }
   };
 
