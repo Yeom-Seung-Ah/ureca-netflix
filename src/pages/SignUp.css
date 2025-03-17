@@ -70,27 +70,6 @@
   color: #d7d7d7;
 }
 
-.signup-button {
-  background: #e50914;
-  color: white;
-  border: none;
-  padding: 12px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.signup-button:hover {
-  background: #b20710;
-}
-
-.error-text {
-  color: #ff4a4a;
-  font-size: 12px;
-  margin: 4px 0 10px;
-}
-
 .error-input {
   border: 1px solid red !important;
   box-shadow: 0 0 5px red;
@@ -123,7 +102,7 @@
 }
 
 .signup-button:hover {
-  background: #f40612;
+  background: #a3040c;
 }
 
 .signup-button:disabled {
@@ -136,15 +115,13 @@
 }
 
 .error-text {
+  height: 15px; /* 고정된 높이 */
   color: #ff4d4d;
   font-size: 12px;
-  margin-bottom: 10px;
+  padding: 0px;
+  margin: 2px !important;
 }
 
 .signup-content form {
   width: 100%;
-}
-
-.error-text {
-  margin: 0 !important;
 }

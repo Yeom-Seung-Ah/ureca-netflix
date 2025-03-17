@@ -145,9 +145,12 @@ function Signup() {
               value={formData.confirmPassword}
               onChange={handleChange}
             />
-            {errors.confirmPassword && (
-              <p className="error-text">❗ 비밀번호가 일치하지 않습니다!</p>
-            )}
+
+            <p className="error-text">
+              {errors.confirmPassword
+                ? "❗ 비밀번호가 일치하지 않습니다!"
+                : "\u00A0"}
+            </p>
 
             <button type="submit" className="signup-button">
               가입하기
