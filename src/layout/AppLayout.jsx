@@ -57,7 +57,7 @@ const AppLayout = () => {
             <Form className="d-flex align-items-center gap-2">
   {/* userName이 있을 때 이름을 먼저 표시 */}
   {userName ? (
-    <span className="me-3">{userName} 님</span>  
+    <span className="me-3">{userName} 님</span>  // 이름 뒤에 여백 추가
   ) : null}
 
   {/* 검색 입력 필드 */}
