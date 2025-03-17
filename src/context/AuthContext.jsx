@@ -22,11 +22,10 @@ const AuthProvider = ({ children }) => {
   }, [token]);
 
   const login = async (email, password) => {
-    const hashedPassword = sha256(password).toString(); // SHA-256 해싱
     try {
       const response = await axios.post("http://localhost:8080/tokenLogin", {
         userId: email,
-        userPwd: hashedPassword, // 해싱된 값 전송
+        userPwd: password, // 해싱된 값 전송
       });
 
       if (response.data.Authorization) {
@@ -42,10 +41,10 @@ const AuthProvider = ({ children }) => {
         alert(`${sessionStorage.getItem("name")}님 환영합니다!`);
         return { success: true };
       } else {
-        alert("이메일 또는 비밀번호를 다시 확인해주세요.");
+        alert("아이디 또는 비밀번호를 다시 확인해주세요.");
         return {
           success: false,
-          message: "이메일 또는 비밀번호를 다시 확인해주세요.",
+          message: "아이디 또는 비밀번호를 다시 확인해주세요.",
         };
       }
     } catch (error) {

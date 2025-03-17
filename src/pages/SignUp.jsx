@@ -66,10 +66,9 @@ function Signup() {
     }
 
     setErrors(newErrors);
-    const hashedPassword = sha256(formData.password);
     const formDataToSend = {
       userId: formData.email,
-      userPwd: hashedPassword,
+      userPwd: formData.password,
       userName: formData.name,
     };
 
