@@ -18,7 +18,17 @@ back: JAVA, SpringBoot, mySQL, myBatis
 
 ---
 
+✍️more information
+
+> 리액트 선택 이유
+
+> 🔴미비한 점/보완할 점
+
+---
+
 (더 자세한 내용 및 프로젝트 기록은 [티스토리](https://kenco.tistory.com/56). 암호는 슬랙DM주세요~!)
+
+## 프로젝트 기록
 
 ### <2025.03.13>
 
@@ -34,6 +44,24 @@ back: JAVA, SpringBoot, mySQL, myBatis
 
 | Step5. front단 - 회원가입 시 비밀번호 암호화하기 : SHA-256 |
 
-| Step6. back단 - 회원가입/로그인 DB 구축 및 로직 구현하기 |
+| Step6. back단 - 회원가입/로그인 DB 구축 및 기본 로직 구현하기 |
 
 | Step7. front단 - Header에 로그인 및 로그아웃 구현하기 |
+
+### <2025.03.17>
+
+| Step8. back단 - 회원가입/로그인 기본 로직에서 토큰 방식으로 업그레이드 |
+
+| Step9. front단 - 회원가입/로그인 토큰 방식과 호환되게 변경하기(context로 로그인 상태 전역관리) |
+
+| Step10. back단 - 회원 가입 시 패스워드 salt 암호화로 보안 강화하기 |
+
+| Step11. back단 - 구글 OAuth로 소셜 로그인 구현하기 |
+
+| Step12. back단 - back단 레포지토리 생성하여여 회원가입/로그인/로그아웃 기능 commit |
+
+| Step13. front단 - 배너 포스터 이미지에서 유튜브 영상 api로 업그레이드 하기 |
+
+| Step14. front단 - 영화 카테고리별 리스트 Carousel 컴포넌트 만들기 |
+
+| Step15. front단 - 영화 카테고리별 리스트 Carousel 컴포넌트 디자인 업그레이드 |
