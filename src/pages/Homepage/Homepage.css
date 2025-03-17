@@ -1,8 +1,3 @@
-/* 세로 스크롤을 허용하면서 스크롤 바 숨기기 */
-body, html {
-    overflow-y: scroll; /* 세로 스크롤을 가능하게 */
-  }
-  
   /* 스크롤 바를 숨기기 */
   ::-webkit-scrollbar {
     display: none;  /* 스크롤 바 숨기기 */
