@@ -69,3 +69,11 @@ back: JAVA, SpringBoot, mySQL, myBatis
 | Step15. front단 - 영화 카테고리별 리스트 Carousel 컴포넌트 만들기 |
 
 | Step16. front단 - 영화 카테고리별 리스트 Carousel 컴포넌트 디자인 업그레이드 |
+
+### <2025.03.19>
+
+| Step17. back단 - 영화 찜하기 기능 구현 |
+
+| Step18. back단 - 로그인된 사용자만 영화 찜하기 기능이 가능하게 수정 및 토큰 업데이트|
+
+| Step19. back단 - 검색 기능 구현 및 토큰 업데이트 |
