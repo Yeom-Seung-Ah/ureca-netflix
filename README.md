@@ -76,4 +76,4 @@ back: JAVA, SpringBoot, mySQL, myBatis
 
 | Step18. back단 - 로그인된 사용자만 영화 찜하기 기능이 가능하게 수정 및 토큰 업데이트|
 
-| Step19. back단 - 검색 기능 구현 및 토큰 업데이트 |
+| Step19. back단 - 검색 기능 구현 |
