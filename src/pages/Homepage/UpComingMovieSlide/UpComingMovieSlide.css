@@ -1,0 +1,39 @@
+@font-face {
+  font-family: "SUIT-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+.carousel-container {
+  overflow: visible;
+  height: 380px;
+}
+
+.pm {
+  background-color: black;
+  color: white;
+}
+
+.title-container {
+  display: flex; /* ✅ 제목과 빨간 네모만 한 줄로 */
+  align-items: center;
+  margin-bottom: 10px; /* ✅ 제목과 캐러셀 사이 여백 추가 */
+}
+
+.list-gap {
+  margin-top: 10px;
+}
+
+.divide-title {
+  width: 7px;
+  height: 25px;
+  background-color: red;
+  margin-right: 10px;
+}
+
+h2 {
+  font-family: "SUIT-Regular";
+  font-weight: 500;
+  margin: 0;
+}

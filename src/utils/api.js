@@ -8,6 +8,10 @@ const api = axios.create({
     accept: "application/json",
     Authorization: `Bearer ${API_KEY}`,
   },
+  params: {
+    region: "KR", // 모든 요청에 자동으로 한국(region=KR) 적용!
+    language: "ko-KR", // 기본 언어도 한국어로 설정
+  },
 });
 
 // 요청 인터셉터 추가하기

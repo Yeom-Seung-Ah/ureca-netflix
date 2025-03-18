@@ -7,6 +7,9 @@ import Signup from "./pages/SignUp/SignUp";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthProvider } from "./context/AuthContext"; // AuthProvider 추가
 import "./App.css";
+import PopularMovieSlide from "./pages/Homepage/PopularMovieSlide/PopularMovieSlide";
+import NowPlayingMovieSlide from "./pages/Homepage/NowPlayingMovieSlide/NowPlayingMovieSlide";
+import UpComingMovieSlide from "./pages/Homepage/UpComingMovieSlide/UpComingMovieSlide";
 
 function App() {
   return (
@@ -14,8 +17,19 @@ function App() {
       <AuthProvider>
         <Routes>
           <Route path="/" element={<Header />}>
-            <Route index element={<Banner />} />
+            <Route
+              index
+              element={
+                <>
+                  <Banner />
+                  <PopularMovieSlide />
+                  <NowPlayingMovieSlide />
+                  <UpComingMovieSlide />
+                </>
+              }
+            />
           </Route>
+
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="*" element={<Notfound />} />
