@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./Signup.css";
-import netflixLogo from "./../assets/netflix-logo.png";
+import netflixLogo from "./../../assets/netflix-logo.png";
 import { Link } from "react-router-dom";
 import CryptoJS from "crypto-js";
 import axios from "axios";

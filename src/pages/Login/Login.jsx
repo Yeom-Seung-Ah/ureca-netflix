@@ -1,7 +1,7 @@
 import { useState } from "react";
-import useAuth from "./../context/useAuth";
+import useAuth from "./../../context/useAuth";
 import "./Login.css";
-import netflixLogo from "./../assets/netflix-logo.png";
+import netflixLogo from "./../../assets/netflix-logo.png";
 import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
