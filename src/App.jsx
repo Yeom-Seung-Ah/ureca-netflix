@@ -6,6 +6,7 @@ import Login from "./pages/Login/Login";
 import Signup from "./pages/SignUp/SignUp";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthProvider } from "./context/AuthContext"; // AuthProvider 추가
+import "./App.css";
 
 function App() {
   return (
