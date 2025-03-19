@@ -72,8 +72,10 @@ back: JAVA, SpringBoot, mySQL, myBatis
 
 | Step16. front/back단 - 구글 OAuth로 소셜 로그인 구현하기 |
 
-| Step17. back단 - 영화 찜하기 기능 구현 |
+| Step17. front단 - 로그인된 사용자만 영화 찜하기 기능이 가능하게 수정 |
 
-| Step18. back단 - 로그인된 사용자만 영화 찜하기 기능이 가능하게 수정 및 토큰 업데이트|
+### <2025.03.20>
+
+| Step18. back단 - 영화 찜하기 기능 구현 |
 
 | Step19. back단 - 검색 기능 구현 및 토큰 업데이트|
