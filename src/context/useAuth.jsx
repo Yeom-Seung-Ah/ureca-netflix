@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthContext } from "./AuthContext"; // 파일명에 맞게 수정
+import { AuthContext } from "./AuthContext";
 
 const useAuth = () => {
   const context = useContext(AuthContext);

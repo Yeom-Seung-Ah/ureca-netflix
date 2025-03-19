@@ -13,41 +13,50 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Outlet } from "react-router-dom";
 import netflixLogo from "./../assets/netflix-logo.png";
-import useAuth from "./../context/useAuth"; // AuthContext 가져오기
-import { useState, useEffect } from "react";
+import useAuth from "./../context/useAuth";
+import axios from "axios";
 
 function Header() {
-  const navigate = useNavigate(); //  네비게이션 함수 선언
-  const { logout } = useAuth();
-
-  // ✅ 로그인 상태를 저장할 useState 추가
-  const [name, setName] = useState(sessionStorage.getItem("name") || "");
-  const [token, setToken] = useState(
-    sessionStorage.getItem("Authorization") || ""
-  );
-
-  useEffect(() => {
-    const updateAuth = () => {
-      console.log("🔄 헤더에서 세션스토리지 변경 감지!");
-      setName(sessionStorage.getItem("name"));
-      setToken(sessionStorage.getItem("Authorization"));
-    };
-
-    window.addEventListener("storage", updateAuth);
-    return () => window.removeEventListener("storage", updateAuth);
-  }, []);
+  const navigate = useNavigate();
+  const { name, token, logout } = useAuth(); // AuthContext에서 직접 상태값을 가져옴
 
   // 로그인 버튼 클릭 시 실행될 함수
   const onClickLogin = () => {
-    navigate("/login"); // "/login" 페이지로 이동
+    navigate("/login");
+  };
+
+  // 찜한 리스트 클릭 시 토큰 유효성 검사 후 처리 (axios 사용)
+  const onClickWishList = async (e) => {
+    e.preventDefault();
+    if (!token) {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+      return;
+    }
+    try {
+      // axios로 POST 요청 보내기
+      await axios.post("http://localhost:8080/checkToken", null, {
+        headers: {
+          Authorization: token,
+        },
+      });
+      // 토큰이 유효한 경우: checkToken()에서 loginTime이 갱신된다고 가정
+      navigate("/wishList");
+    } catch (error) {
+      navigate("/login");
+    }
   };
 
   return (
     <>
       <Navbar expand="md" className="bg-black">
         <Container fluid>
-          <Link to={"/"} className={"navbar-brand "}>
-            <img src={netflixLogo} style={{ width: "100px" }} />
+          <Link to="/" className="navbar-brand">
+            <img
+              src={netflixLogo}
+              style={{ width: "100px" }}
+              alt="Netflix Logo"
+            />
           </Link>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
@@ -56,19 +65,19 @@ function Header() {
               style={{ maxHeight: "80px" }}
               navbarScroll
             >
-              <Link to={"/"} className={"nav-link text-light"}>
+              <Link to="/" className="nav-link text-light">
                 홈
               </Link>
-              <Link to={"/wishList"} className={"nav-link text-light"}>
+              <a
+                href="#"
+                className="nav-link text-light"
+                onClick={onClickWishList}
+              >
                 내가 찜한 리스트
-              </Link>
+              </a>
             </Nav>
             <div id="p-name-wrapper">
-              {token ? (
-                <p id="p-name">{sessionStorage.getItem("name")}님의 NETFLIX</p>
-              ) : (
-                ""
-              )}
+              {token && <p id="p-name">{name}님의 NETFLIX</p>}
             </div>
             <Form className="d-flex">
               <Form.Control
@@ -80,9 +89,7 @@ function Header() {
               <Button variant="outline-danger" id="searchBtn" className="mx-1">
                 <FontAwesomeIcon icon={faSearch} />
               </Button>
-              {token ? (
-                ""
-              ) : (
+              {!token ? (
                 <Button
                   variant="outline-danger"
                   className="mx-1"
@@ -90,14 +97,12 @@ function Header() {
                 >
                   <FontAwesomeIcon icon={faUser} />
                 </Button>
-              )}
+              ) : null}
               {token ? (
                 <Button variant="danger" className="mx-1" onClick={logout}>
                   <FontAwesomeIcon icon={faArrowRightFromBracket} />
                 </Button>
-              ) : (
-                ""
-              )}
+              ) : null}
             </Form>
           </Navbar.Collapse>
         </Container>

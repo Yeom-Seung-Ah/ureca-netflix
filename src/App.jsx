@@ -11,27 +11,31 @@ import PopularMovieSlide from "./pages/Homepage/PopularMovieSlide/PopularMovieSl
 import NowPlayingMovieSlide from "./pages/Homepage/NowPlayingMovieSlide/NowPlayingMovieSlide";
 import UpComingMovieSlide from "./pages/Homepage/UpComingMovieSlide/UpComingMovieSlide";
 // 예: App.jsx 또는 별도의 AuthInitializer 컴포넌트에서
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import WishList from "./pages/WishList/WishList";
+import { AuthContext } from "./context/AuthContext";
 
 function AuthInitializer() {
   const navigate = useNavigate();
+  const { updateAuth } = useContext(AuthContext);
 
   useEffect(() => {
+    // 로그인 페이지라면 쿼리 파라미터 업데이트를 하지 않음
+    if (window.location.pathname === "/login") return;
+
+    // 만약 이미 sessionStorage에 토큰이 있다면 업데이트하지 않음
+    if (sessionStorage.getItem("Authorization")) return;
+
     const params = new URLSearchParams(window.location.search);
     const token = params.get("token");
     const name = params.get("name");
-
-    if (token && name) {
-      sessionStorage.setItem("Authorization", token);
-      sessionStorage.setItem("name", name);
-      console.log("세션스토리지 업데이트됨:", token, name);
-
-      // URL의 쿼리 파라미터를 제거 (리다이렉트 없이 히스토리 수정)
+    if (token && name && token !== "null") {
+      updateAuth(token, name);
+      // 쿼리 파라미터 제거 (replace)
       navigate(window.location.pathname, { replace: true });
     }
-  }, [navigate]);
+  }, [navigate, updateAuth]);
 
   return null;
 }
@@ -40,7 +44,7 @@ function App() {
   return (
     <>
       <AuthProvider>
-        <AuthInitializer /> {/* 로그인 정보 초기화를 위한 컴포넌트 */}
+        <AuthInitializer />
         <Routes>
           <Route path="/" element={<Header />}>
             <Route
@@ -54,11 +58,11 @@ function App() {
                 </>
               }
             />
+            <Route path="/wishList" element={<WishList />} />
           </Route>
 
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/wishList" element={<WishList />} />
           <Route path="*" element={<Notfound />} />
         </Routes>
       </AuthProvider>
