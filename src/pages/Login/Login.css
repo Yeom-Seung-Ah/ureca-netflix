@@ -1,88 +1,104 @@
+.login-background {
+  position: relative; /* 오버레이를 위한 기준 위치 */
+  background: url("https://blog.kakaocdn.net/dn/dXwEao/btq1C2XPrpC/jukdVsrRqCMQaxDlQuH8G0/img.png");
+  background-size: cover; /* 화면에 꽉 차도록 설정 */
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .login-background {
-    width: 100vw;
-    height: 100vh;
-    background: url("https://blog.kakaocdn.net/dn/dXwEao/btq1C2XPrpC/jukdVsrRqCMQaxDlQuH8G0/img.png");
-    background-size: cover;
-    background-position: center;   
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
+/* 검정색 반투명 오버레이 추가 */
+.login-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* 검정색 + 50% 투명도 */
+  z-index: 1; /* 배경 위에 위치 */
+}
 
-  .login-form-container {
-    color: white;
-    padding: 2rem;
-    background-color: rgba(0, 0, 0, 0.8);
-    border-radius: 5px;
-    max-width: 400px; /* 최대 너비 */
-    text-align: center;
-    z-index: 10; /* 로그인 폼은 오버레이 위에 위치하도록 설정 */
-  }
-  
-  .login-logo {
-    width: 200px;
-    margin-bottom: 2rem;
-  }
-  
-  input[type="email"],
-  input[type="password"] {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #333;
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    font-size: 14px;
-  }
-  
-  button {
-    width: 100%;
-    padding: 14px;
-    
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-.loginBtn:hover {
-    background-color: darkred;
-  }
-.loginBtn{
-    background-color: red;
+/* 내부 콘텐츠가 오버레이 아래 깔리지 않도록 */
+.login-content {
+  position: relative;
+  z-index: 2; /* 오버레이보다 위에 배치 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.signupBtn{
-    background-color: #333;
+
+.login-logo img {
+  margin-top: -80px;
+  width: 250px;
 }
-.signupBtn:hover {
-  background-color: darkred;
+
+.login-box {
+  padding: 60px;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 28vw;
+  height: 60vh;
 }
-  
-  /* 오류 메시지 */
-  .error-message {
-    color: red;
-    font-size: 14px;
-    margin-bottom: 10px;
-  }
-  
-  /* 로그인 옵션 */
-  .login-options {
-    margin-top: 20px;
-    text-align: left;
-  }
-  
-  .login-options a {
-    color: white;
-    font-size: 12px;
-    text-decoration: none;
-  }
-  
-  .login-options a:hover {
-    text-decoration: underline;
-  }
-  
+
+.login-box input::placeholder {
+  font-weight: 100;
+  color: #d7d7d7; /* 원하는 색상 */
+  opacity: 1; /* 일부 브라우저에서 투명도를 줄이기 위해 필요 */
+}
+
+.login-box h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+/* 입력 필드 스타일 */
+.login-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+  background: rgba(56, 66, 99, 0.6);
+  color: white;
+}
+
+/* 로그인 버튼 스타일 */
+.login-box button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.login-box button:hover {
+  background: darkred;
+}
+
+.signup-link {
+  margin-top: 40px;
+}
+
+.signup-link a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 15px;
+}
+.signup-link p {
+  color: rgb(163, 163, 163);
+  font-size: 15px;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}

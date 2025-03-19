@@ -1,84 +1,76 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Login.css';
+import { useState } from "react";
+import useAuth from "./../../context/useAuth";
+import "./Login.css";
+import netflixLogo from "./../../assets/netflix-logo.png";
+import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+function Login() {
+  const { login } = useAuth(); // 로그인 함수 가져오기
 
-  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setError('');
-    setSuccess('');
-  
-    if (!email || !password) {
-      setError('이메일과 비밀번호를 입력하세요.');
-      return;
-    }
+  const [error, setError] = useState(null);
 
-    
-  
-    try {
-      const response = await fetch('http://localhost:8080/api/member/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
-  
-      const data = await response.json();
-      if (data.status === 'success') {
-        // 로그인 성공 시 사용자 이름을 sessionStorage에 저장
-        sessionStorage.setItem('userName', data.userName); // 데이터 저장
-        setSuccess(data.message);
-        setTimeout(() => navigate('/'), 1500); // 1.5초 후 홈 화면으로 이동
-      } else {
-        setError(data.message);
-      }
-    } catch (err) {
-      setError('서버 연결에 실패했습니다.');
-    }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+
+    // 입력 중 오류 메시지 초기화
+    setError(null);
   };
-  
-  
 
-  const toSignup = () => {
-    navigate('/signup');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const result = await login(formData.email, formData.password);
+
+    if (!result.success) {
+      alert(result.message); // 정확한 오류 메시지가 alert로 출력됨
+    }
   };
 
   return (
-    <div className="login-container">
-      <div className="login-background">
-        <div className="login-overlay"></div>
-
-        <div className="login-form-container">
-          <h1>로그인</h1>
-
-          <input type="email" placeholder="이메일 주소" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <input type="password" placeholder="비밀번호" value={password} onChange={(e) => setPassword(e.target.value)} />
-
-          {error && <div className="error-message">{error}</div>}
-          {success && <div className="success-message">{success}</div>}
-
-          <button className="loginBtn" onClick={handleLogin}>로그인</button>
-          <div>또는</div>
-          <button className="signupBtn" onClick={toSignup}>회원가입</button>
-
-          <div className="login-options">
-            <div>
-              <input type="checkbox" id="remember" />
-              <label htmlFor="remember">이메일을 기억합니다</label>
-            </div>
-            <a href="/forgot-password">비밀번호를 잊으셨나요?</a>
+    <div className="login-background">
+      <div className="login-content">
+        <div className="login-logo">
+          <Link to={"/"} className="navbar-brand">
+            <img src={netflixLogo} alt="Netflix Logo" />
+          </Link>
+        </div>
+        <div className="login-box">
+          <h2>로그인</h2>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="email"
+              placeholder="이메일 주소 또는 휴대폰 번호"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="비밀번호"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+            {error && <p className="error-text">{error}</p>}
+            <button type="submit">로그인</button>
+          </form>
+          <div className="signup-link">
+            <p>
+              넷플릭스 회원이 아닌가요?{" "}
+              <Link to={"/signup"}>지금 가입하세요.</Link>
+            </p>
           </div>
         </div>
       </div>
     </div>
   );
-};
-
+}
 
 export default Login;
