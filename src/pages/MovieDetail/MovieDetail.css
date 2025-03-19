@@ -1,0 +1,62 @@
+/* 전체 배경 및 글자 스타일 */
+body {
+  background-color: #111; /* 검정 배경 */
+  color: #fff; /* 흰색 글자 */
+}
+
+/* 영화 상세 정보를 담는 컨테이너 */
+.movie-detail-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  background-color: #222;
+  border-radius: 10px;
+  max-width: 1200px;
+  margin: auto;
+  flex-wrap: wrap; /* 화면 크기에 따라 컨텐츠가 줄 바꿈을 할 수 있도록 함 */
+}
+
+/* 영화 포스터 스타일 */
+.movie-poster {
+  width: 300px; /* 포스터 크기 고정 */
+  height: 400px; /* 비율을 유지하면서 자동으로 높이를 맞춤 */
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* 영화 정보 영역 */
+.movieInfo {
+  color: #fff;
+  margin-left: 20px;
+  max-width: 800px; /* 영화 정보 영역의 최대 너비를 제한 */
+  display: flex;
+  flex-direction: column; /* 세로 방향으로 쌓이도록 설정 */
+  justify-content: flex-start; /* 상단에 맞춰서 쌓이도록 설정 */
+  overflow-y: auto; /* 내용이 넘칠 경우 스크롤 가능하도록 설정 */
+}
+
+/* 영화 제목 스타일 */
+.movieInfo h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+/* 영화 줄거리 스타일 */
+.movieInfo p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #e0e0e0;
+}
+
+/* 강조된 텍스트 스타일 */
+.movieInfo strong {
+  color: #e50914; /* 넷플릭스 스타일 빨간색 */
+  font-weight: bold;
+}
+
+/* 영화 정보의 평점, 인기도 스타일 */
+.movieInfo .rating,
+.movieInfo .popularity {
+  margin-top: 10px;
+  font-size: 18px;
+}

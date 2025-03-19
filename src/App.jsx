@@ -11,7 +11,7 @@ import PopularMovieSlide from "./pages/Homepage/PopularMovieSlide/PopularMovieSl
 import NowPlayingMovieSlide from "./pages/Homepage/NowPlayingMovieSlide/NowPlayingMovieSlide";
 import UpComingMovieSlide from "./pages/Homepage/UpComingMovieSlide/UpComingMovieSlide";
 import SearchMoviesPage from "./pages/SearchMovies/SearchMoviesPage";
-
+import MovieDetail from "./pages/MovieDetail/MovieDetail";
 function App() {
   return (
     <>
@@ -30,6 +30,7 @@ function App() {
               }
             />
             <Route path="/searchmovies" element={<SearchMoviesPage/>}/>
+            <Route path="/movie/:id" element={<MovieDetail />} />
           </Route>
 
           <Route path="/login" element={<Login />} />
