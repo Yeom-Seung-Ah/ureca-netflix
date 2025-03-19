@@ -14,10 +14,28 @@ import {
 import { Outlet } from "react-router-dom";
 import netflixLogo from "./../assets/netflix-logo.png";
 import useAuth from "./../context/useAuth"; // AuthContext 가져오기
+import { useState, useEffect } from "react";
 
 function Header() {
   const navigate = useNavigate(); //  네비게이션 함수 선언
-  const { name, logout } = useAuth(); //로그인 정보 가져오기
+  const { logout } = useAuth();
+
+  // ✅ 로그인 상태를 저장할 useState 추가
+  const [name, setName] = useState(sessionStorage.getItem("name") || "");
+  const [token, setToken] = useState(
+    sessionStorage.getItem("Authorization") || ""
+  );
+
+  useEffect(() => {
+    const updateAuth = () => {
+      console.log("🔄 헤더에서 세션스토리지 변경 감지!");
+      setName(sessionStorage.getItem("name"));
+      setToken(sessionStorage.getItem("Authorization"));
+    };
+
+    window.addEventListener("storage", updateAuth);
+    return () => window.removeEventListener("storage", updateAuth);
+  }, []);
 
   // 로그인 버튼 클릭 시 실행될 함수
   const onClickLogin = () => {
@@ -41,15 +59,15 @@ function Header() {
               <Link to={"/"} className={"nav-link text-light"}>
                 홈
               </Link>
-              <Link to={"/"} className={"nav-link text-light"}>
+              <Link to={"/wishList"} className={"nav-link text-light"}>
                 내가 찜한 리스트
               </Link>
             </Nav>
             <div id="p-name-wrapper">
-              {sessionStorage.getItem("Authorization") === null ? (
-                ""
-              ) : (
+              {token ? (
                 <p id="p-name">{sessionStorage.getItem("name")}님의 NETFLIX</p>
+              ) : (
+                ""
               )}
             </div>
             <Form className="d-flex">
@@ -62,7 +80,9 @@ function Header() {
               <Button variant="outline-danger" id="searchBtn" className="mx-1">
                 <FontAwesomeIcon icon={faSearch} />
               </Button>
-              {sessionStorage.getItem("Authorization") === null ? (
+              {token ? (
+                ""
+              ) : (
                 <Button
                   variant="outline-danger"
                   className="mx-1"
@@ -70,15 +90,13 @@ function Header() {
                 >
                   <FontAwesomeIcon icon={faUser} />
                 </Button>
-              ) : (
-                ""
               )}
-              {sessionStorage.getItem("Authorization") === null ? (
-                ""
-              ) : (
+              {token ? (
                 <Button variant="danger" className="mx-1" onClick={logout}>
                   <FontAwesomeIcon icon={faArrowRightFromBracket} />
                 </Button>
+              ) : (
+                ""
               )}
             </Form>
           </Navbar.Collapse>

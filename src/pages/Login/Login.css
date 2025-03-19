@@ -40,7 +40,7 @@
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.7);
   width: 28vw;
-  height: 60vh;
+  height: 62vh;
 }
 
 .login-box input::placeholder {
@@ -67,7 +67,7 @@
 }
 
 /* 로그인 버튼 스타일 */
-.login-box button {
+.login-btn {
   width: 100%;
   padding: 12px;
   margin-top: 10px;
@@ -80,7 +80,7 @@
   font-weight: bold;
 }
 
-.login-box button:hover {
+.login-btn:hover {
   background: darkred;
 }
 
@@ -101,4 +101,27 @@
 
 .signup-link a:hover {
   text-decoration: underline;
+}
+
+.google-btn {
+  margin-top: 10px;
+  padding: 9px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  border: none;
+  background-color: #d7d7d7;
+}
+
+.google-btn img {
+  width: 30px;
+}
+
+.google-btn:hover {
+  background-color: rgb(174, 174, 174);
+}
+
+.google-btn-content {
+  margin-left: 60px;
 }
