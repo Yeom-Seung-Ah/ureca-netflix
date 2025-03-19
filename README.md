@@ -60,20 +60,20 @@ back: JAVA, SpringBoot, mySQL, myBatis
 
 ### <2025.03.18>
 
-| Step12. back단 - 구글 OAuth로 소셜 로그인 구현하기 |
+| Step12. back단 - back단 레포지토리 생성하여 회원가입/로그인/로그아웃 기능 commit |
 
-| Step13. back단 - back단 레포지토리 생성하여 회원가입/로그인/로그아웃 기능 commit |
+| Step13. front단 - 배너 포스터 이미지에서 유튜브 영상 api로 업그레이드 하기 |
 
-| Step14. front단 - 배너 포스터 이미지에서 유튜브 영상 api로 업그레이드 하기 |
+| Step14. front단 - 영화 카테고리별 리스트 Carousel 컴포넌트 만들기 |
 
-| Step15. front단 - 영화 카테고리별 리스트 Carousel 컴포넌트 만들기 |
-
-| Step16. front단 - 영화 카테고리별 리스트 Carousel 컴포넌트 디자인 업그레이드 |
+| Step15. front단 - 영화 카테고리별 리스트 Carousel 컴포넌트 디자인 업그레이드 |
 
 ### <2025.03.19>
+
+| Step16. front/back단 - 구글 OAuth로 소셜 로그인 구현하기 |
 
 | Step17. back단 - 영화 찜하기 기능 구현 |
 
 | Step18. back단 - 로그인된 사용자만 영화 찜하기 기능이 가능하게 수정 및 토큰 업데이트|
 
-| Step19. back단 - 검색 기능 구현 |
+| Step19. back단 - 검색 기능 구현 및 토큰 업데이트|
