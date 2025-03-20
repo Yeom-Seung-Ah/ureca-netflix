@@ -27,33 +27,11 @@ function Header() {
   };
 
   //검색기능
-  const [keyword, setkeyword] = useState("");
+  const [keyword, setKeyword] = useState("");
   const search = (event) => {
     event.preventDefault(); //페이지 새로고침을 막고 아래 코드를 실행
     navigate(`/searchmovies?q=${keyword}`); //내가 입력한 값으로 url변경
-    setkeyword("");
-  };
-
-  // 찜한 리스트 클릭 시 토큰 유효성 검사 후 처리 (axios 사용)
-  const onClickWishList = async (e) => {
-    e.preventDefault();
-    if (!token) {
-      alert("로그인이 필요합니다.");
-      navigate("/login");
-      return;
-    }
-    try {
-      // axios로 POST 요청 보내기
-      await axios.post("http://localhost:8080/checkToken", null, {
-        headers: {
-          Authorization: token,
-        },
-      });
-      // 토큰이 유효한 경우: checkToken()에서 loginTime이 갱신된다고 가정
-      navigate("/wishList");
-    } catch (error) {
-      navigate("/login");
-    }
+    setKeyword("");
   };
 
   return (
@@ -77,13 +55,9 @@ function Header() {
               <Link to="/" className="nav-link text-light">
                 홈
               </Link>
-              <a
-                href="#"
-                className="nav-link text-light"
-                onClick={onClickWishList}
-              >
+              <Link to="/wishList" className="nav-link text-light">
                 내가 찜한 리스트
-              </a>
+              </Link>
             </Nav>
             <div id="p-name-wrapper">
               {token && <p id="p-name">{name}님의 NETFLIX</p>}
@@ -96,9 +70,14 @@ function Header() {
                 className="mx-1 p-2 custom-search"
                 bsPrefix="custom-control"
                 value={keyword}
-                onChange={(event) => setkeyword(event.target.value)}
+                onChange={(event) => setKeyword(event.target.value)}
               />
-              <Button variant="outline-danger" id="searchBtn" className="mx-1">
+              <Button
+                type="submit"
+                variant="outline-danger"
+                id="searchBtn"
+                className="mx-1"
+              >
                 <FontAwesomeIcon icon={faSearch} />
               </Button>
               {!token ? (
@@ -111,7 +90,11 @@ function Header() {
                 </Button>
               ) : null}
               {token ? (
-                <Button variant="danger" className="mx-1" onClick={logout}>
+                <Button
+                  variant="danger"
+                  className="mx-1"
+                  onClick={() => logout()}
+                >
                   <FontAwesomeIcon icon={faArrowRightFromBracket} />
                 </Button>
               ) : null}

@@ -4,10 +4,25 @@ import { useEffect, useState } from "react";
 import api from "../../utils/api";
 import Loading from "../../utils/Loading";
 import "./MovieDetail.css";
+import useAuth from "../../context/useAuth";
+import axios from "axios";
 
 const MovieDetail = () => {
   const { id } = useParams(); // URL에서 id 가져오기
   const [movie, setMovie] = useState(null);
+  const { token } = useAuth();
+
+  useEffect(() => {
+    if (token) {
+      axios
+        .post("http://localhost:8080/checkToken", null, {
+          headers: { Authorization: token },
+        })
+        .catch((err) => {
+          console.error("토큰 만료됨", err);
+        });
+    }
+  }, [token]);
 
   const Back = () => {
     window.history.back();
@@ -49,64 +64,67 @@ const MovieDetail = () => {
         />
 
         <div className="movieInfo">
-          <h1>{movie.title}</h1>
-          <p>{movie.overview}</p>
-
-          <p>
-            <strong>장르 </strong> {genres}
-          </p>
-          <p>
-            <strong>예산 </strong> {budget} 원
-          </p>
-          <p>
-            <strong>개봉일 </strong> {releaseDate}
-          </p>
-          <p>
-            <strong>평점 </strong> {voteAverage} / 10
-          </p>
-          <p>
-            <strong>인기도 </strong> {popularity}
-          </p>
-
-          {/* 추가 정보들 */}
-          {movie.original_language && (
+          <div className="movieInfo-one">
+            <h1>{movie.title}</h1>
+            <p className="overview">{movie.overview}</p>
+          </div>
+          <div className="movieInfo-two">
             <p>
-              <strong>원어 </strong> {movie.original_language.toUpperCase()}
+              <strong>장르 </strong> {genres}
             </p>
-          )}
-          {movie.runtime && (
-            <p>
-              <strong>상영시간 </strong> {movie.runtime}분
-            </p>
-          )}
-          {movie.production_companies.length > 0 && (
-            <p>
-              <strong>제작사 </strong>{" "}
-              {movie.production_companies
-                .map((company) => company.name)
-                .join(", ")}
-            </p>
-          )}
-          {movie.release_date && (
-            <p>
-              <strong>개봉일 </strong> {releaseDate}
-            </p>
-          )}
-          {movie.budget > 0 && (
             <p>
               <strong>예산 </strong> {budget} 원
             </p>
-          )}
-          {movie.revenue > 0 && (
             <p>
-              <strong>수익 </strong> {movie.revenue.toLocaleString()} 원
+              <strong>개봉일 </strong> {releaseDate}
             </p>
-          )}
-          {movie.tagline && (
             <p>
-              <strong>태그라인 </strong> {movie.tagline}
+              <strong>평점 </strong> {voteAverage} / 10
             </p>
-          )}
+            <p>
+              <strong>인기도 </strong> {popularity}
+            </p>
+
+            {/* 추가 정보들 */}
+            {movie.original_language && (
+              <p>
+                <strong>원어 </strong> {movie.original_language.toUpperCase()}
+              </p>
+            )}
+            {movie.runtime && (
+              <p>
+                <strong>상영시간 </strong> {movie.runtime}분
+              </p>
+            )}
+            {movie.production_companies.length > 0 && (
+              <p>
+                <strong>제작사 </strong>{" "}
+                {movie.production_companies
+                  .map((company) => company.name)
+                  .join(", ")}
+              </p>
+            )}
+            {movie.release_date && (
+              <p>
+                <strong>개봉일 </strong> {releaseDate}
+              </p>
+            )}
+            {movie.budget > 0 && (
+              <p>
+                <strong>예산 </strong> {budget} 원
+              </p>
+            )}
+            {movie.revenue > 0 && (
+              <p>
+                <strong>수익 </strong> {movie.revenue.toLocaleString()} 원
+              </p>
+            )}
+            {movie.tagline && (
+              <p>
+                <strong>태그라인 </strong> {movie.tagline}
+              </p>
+            )}
+          </div>
         </div>
         <button className="back-button" onClick={Back}>
           뒤로 가기

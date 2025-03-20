@@ -40,28 +40,15 @@ const AuthProvider = ({ children }) => {
           }
         );
       } catch (error) {
-        if (
-          error.response &&
-          (error.response.status === 401 || error.response.status === 400)
-        ) {
-          console.warn(
-            "토큰 만료 혹은 로그아웃 요청 오류 발생(무시):",
-            error.response.status
-          );
-        } else {
-          console.error("로그아웃 요청 실패:", error);
-        }
+        console.warn("로그아웃 요청 오류 발생(무시):", error);
       } finally {
-        sessionStorage.removeItem("Authorization");
-        sessionStorage.removeItem("name");
-        sessionStorage.removeItem("userId");
+        sessionStorage.clear();
         delete axios.defaults.headers.common["Authorization"];
         setToken("");
         setName("");
         setUserId("");
         navigate("/login", { replace: true }); // 쿼리 파라미터 없이 /login으로 이동
         isLoggingOutRef.current = false;
-        window.history.replaceState(null, "", "/login");
       }
     },
     [navigate]
@@ -72,25 +59,47 @@ const AuthProvider = ({ children }) => {
     const interceptor = axios.interceptors.response.use(
       (response) => response,
       (error) => {
+        const url = error.config.url;
+
+        // TMDB API 에러는 무시
+        if (url.includes("themoviedb.org")) {
+          return Promise.reject(error);
+        }
+
         if (error.response && error.response.status === 401) {
-          if (!isLoggingOutRef.current) {
+          if (
+            !isLoggingOutRef.current &&
+            sessionStorage.getItem("Authorization")
+          ) {
             isLoggingOutRef.current = true;
             alert("토큰이 만료되었습니다. 다시 로그인하세요.");
-            // 자동 로그아웃: API 호출 없이 바로 클라이언트 인증 데이터를 클리어
-            sessionStorage.removeItem("Authorization");
-            sessionStorage.removeItem("name");
-            sessionStorage.removeItem("userId");
-            delete axios.defaults.headers.common["Authorization"];
-            setToken("");
-            setName("");
-            setUserId("");
-            navigate("/login");
-            isLoggingOutRef.current = false;
+
+            axios
+              .post(
+                "http://localhost:8080/logout",
+                {},
+                {
+                  headers: {
+                    Authorization: sessionStorage.getItem("Authorization"),
+                  },
+                }
+              )
+              .catch((e) => console.warn("로그아웃 요청 에러:", e))
+              .finally(() => {
+                sessionStorage.clear();
+                delete axios.defaults.headers.common["Authorization"];
+                setToken("");
+                setName("");
+                setUserId("");
+                navigate("/login");
+                isLoggingOutRef.current = false;
+              });
           }
         }
         return Promise.reject(error);
       }
     );
+
     return () => {
       axios.interceptors.response.eject(interceptor);
     };
@@ -106,12 +115,12 @@ const AuthProvider = ({ children }) => {
       if (response.data.Authorization) {
         sessionStorage.setItem("Authorization", response.data.Authorization);
         sessionStorage.setItem("name", response.data.name);
-        sessionStorage.setItem("userId", response.data.userId);
+        sessionStorage.setItem("userId", email);
         setToken(response.data.Authorization);
         setName(response.data.name);
         axios.defaults.headers.common["Authorization"] =
           response.data.Authorization;
-        setUserId(response.data.userId);
+        setUserId(email);
         navigate("/");
         alert(`${response.data.name}님 환영합니다!`);
         return { success: true };
@@ -141,9 +150,39 @@ const AuthProvider = ({ children }) => {
     sessionStorage.setItem("userId", newUserId);
   };
 
+  const [wishList, setWishList] = useState([]);
+
+  const fetchWishList = useCallback(async (userId) => {
+    try {
+      const response = await axios.get("http://localhost:8080/getWishList", {
+        params: { userId },
+      });
+      setWishList(response.data);
+    } catch (error) {
+      console.error("찜 목록 불러오기 실패", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (userId) {
+      fetchWishList(userId);
+    } else {
+      setWishList([]);
+    }
+  }, [userId, fetchWishList]);
+
   return (
     <AuthContext.Provider
-      value={{ name, token, userId, login, logout, updateAuth }}
+      value={{
+        token,
+        name,
+        userId,
+        wishList,
+        updateAuth,
+        login,
+        logout,
+        fetchWishList,
+      }}
     >
       {children}
     </AuthContext.Provider>

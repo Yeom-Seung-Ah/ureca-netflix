@@ -20,9 +20,9 @@
 }
 
 .title-container {
-  display: flex; /* ✅ 제목과 빨간 네모만 한 줄로 */
+  display: flex; /* 제목과 빨간 네모만 한 줄로 */
   align-items: center;
-  margin-bottom: 10px; /* ✅ 제목과 캐러셀 사이 여백 추가 */
+  margin-bottom: 10px; /* 제목과 캐러셀 사이 여백 추가 */
 }
 
 .list-gap {
