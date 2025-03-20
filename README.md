@@ -76,6 +76,6 @@ back: JAVA, SpringBoot, mySQL, myBatis
 
 ### <2025.03.20>
 
-| Step18. back단 - 영화 찜하기 기능 구현 |
+| Step18. front/back단 - 영화 찜하기 기능 구현 |
 
-| Step19. back단 - 검색 기능 구현 및 토큰 업데이트|
+| Step19. front단 - 검색 기능 구현 및 토큰 업데이트 추가 |
