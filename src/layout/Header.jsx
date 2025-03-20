@@ -18,7 +18,7 @@ import axios from "axios";
 
 function Header() {
   const navigate = useNavigate();
-  const { name, token, logout } = useAuth(); // AuthContext에서 직접 상태값을 가져옴
+  const { name, token, userId, logout } = useAuth(); // AuthContext에서 직접 상태값을 가져옴
 
   // 로그인 버튼 클릭 시 실행될 함수
   const onClickLogin = () => {

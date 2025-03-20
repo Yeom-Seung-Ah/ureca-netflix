@@ -30,8 +30,9 @@ function AuthInitializer() {
     const params = new URLSearchParams(window.location.search);
     const token = params.get("token");
     const name = params.get("name");
-    if (token && name && token !== "null") {
-      updateAuth(token, name);
+    const userId = params.get("userId");
+    if (token && name && userId && token !== "null") {
+      updateAuth(token, name, userId);
       // 쿼리 파라미터 제거 (replace)
       navigate(window.location.pathname, { replace: true });
     }

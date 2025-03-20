@@ -10,6 +10,7 @@ const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(
     sessionStorage.getItem("Authorization") || ""
   );
+  const [userId, setUserId] = useState(sessionStorage.getItem("userId") || "");
   const isLoggingOutRef = useRef(false); // 로그아웃 처리 중 여부를 추적
 
   useEffect(() => {
@@ -22,7 +23,6 @@ const AuthProvider = ({ children }) => {
 
   const logout = useCallback(
     async (force = false) => {
-      console.log("로그아웃 함수 진입");
       if (isLoggingOutRef.current) return;
       isLoggingOutRef.current = true;
 
@@ -32,7 +32,6 @@ const AuthProvider = ({ children }) => {
         return;
       }
       try {
-        console.log("로그아웃 API 호출 전");
         await axios.post(
           "http://localhost:8080/logout",
           {},
@@ -40,7 +39,6 @@ const AuthProvider = ({ children }) => {
             headers: { Authorization: sessionStorage.getItem("Authorization") },
           }
         );
-        console.log("로그아웃 API 호출 후");
       } catch (error) {
         if (
           error.response &&
@@ -54,12 +52,13 @@ const AuthProvider = ({ children }) => {
           console.error("로그아웃 요청 실패:", error);
         }
       } finally {
-        console.log("세션스토리지 삭제 실행");
         sessionStorage.removeItem("Authorization");
         sessionStorage.removeItem("name");
+        sessionStorage.removeItem("userId");
         delete axios.defaults.headers.common["Authorization"];
         setToken("");
         setName("");
+        setUserId("");
         navigate("/login", { replace: true }); // 쿼리 파라미터 없이 /login으로 이동
         isLoggingOutRef.current = false;
         window.history.replaceState(null, "", "/login");
@@ -80,9 +79,11 @@ const AuthProvider = ({ children }) => {
             // 자동 로그아웃: API 호출 없이 바로 클라이언트 인증 데이터를 클리어
             sessionStorage.removeItem("Authorization");
             sessionStorage.removeItem("name");
+            sessionStorage.removeItem("userId");
             delete axios.defaults.headers.common["Authorization"];
             setToken("");
             setName("");
+            setUserId("");
             navigate("/login");
             isLoggingOutRef.current = false;
           }
@@ -105,10 +106,12 @@ const AuthProvider = ({ children }) => {
       if (response.data.Authorization) {
         sessionStorage.setItem("Authorization", response.data.Authorization);
         sessionStorage.setItem("name", response.data.name);
+        sessionStorage.setItem("userId", response.data.userId);
         setToken(response.data.Authorization);
         setName(response.data.name);
         axios.defaults.headers.common["Authorization"] =
           response.data.Authorization;
+        setUserId(response.data.userId);
         navigate("/");
         alert(`${response.data.name}님 환영합니다!`);
         return { success: true };
@@ -129,15 +132,19 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  const updateAuth = (newToken, newName) => {
+  const updateAuth = (newToken, newName, newUserId) => {
     setToken(newToken);
     setName(newName);
+    setUserId(newUserId);
     sessionStorage.setItem("Authorization", newToken);
     sessionStorage.setItem("name", newName);
+    sessionStorage.setItem("userId", newUserId);
   };
 
   return (
-    <AuthContext.Provider value={{ name, token, login, logout, updateAuth }}>
+    <AuthContext.Provider
+      value={{ name, token, userId, login, logout, updateAuth }}
+    >
       {children}
     </AuthContext.Provider>
   );
