@@ -15,6 +15,10 @@
   color: white;
 }
 
+.last-list {
+  margin-bottom: 90px;
+}
+
 .title-container {
   display: flex; /* ✅ 제목과 빨간 네모만 한 줄로 */
   align-items: center;

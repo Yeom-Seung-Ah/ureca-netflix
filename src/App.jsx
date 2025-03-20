@@ -14,6 +14,8 @@ import UpComingMovieSlide from "./pages/Homepage/UpComingMovieSlide/UpComingMovi
 import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import WishList from "./pages/WishList/WishList";
+import SearchMoviesPage from "./pages/SearchMovies/SearchMoviesPage";
+import MovieDetail from "./pages/MovieDetail/MovieDetail";
 import { AuthContext } from "./context/AuthContext";
 
 function AuthInitializer() {
@@ -60,6 +62,8 @@ function App() {
               }
             />
             <Route path="/wishList" element={<WishList />} />
+            <Route path="/searchmovies" element={<SearchMoviesPage />} />
+            <Route path="/movie/:id" element={<MovieDetail />} />
           </Route>
 
           <Route path="/login" element={<Login />} />

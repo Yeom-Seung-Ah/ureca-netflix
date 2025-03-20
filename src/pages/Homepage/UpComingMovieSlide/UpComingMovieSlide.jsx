@@ -18,7 +18,7 @@ const UpComingMovieSlide = () => {
   }
 
   return (
-    <div className="pm">
+    <div className="pm last-list">
       <div className="title-container list-gap">
         <span className="divide-title"></span>
         <h2>Upcoming Movies</h2>

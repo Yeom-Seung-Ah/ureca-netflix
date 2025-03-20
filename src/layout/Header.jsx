@@ -15,6 +15,7 @@ import { Outlet } from "react-router-dom";
 import netflixLogo from "./../assets/netflix-logo.png";
 import useAuth from "./../context/useAuth";
 import axios from "axios";
+import { useState } from "react";
 
 function Header() {
   const navigate = useNavigate();
@@ -23,6 +24,14 @@ function Header() {
   // 로그인 버튼 클릭 시 실행될 함수
   const onClickLogin = () => {
     navigate("/login");
+  };
+
+  //검색기능
+  const [keyword, setkeyword] = useState("");
+  const search = (event) => {
+    event.preventDefault(); //페이지 새로고침을 막고 아래 코드를 실행
+    navigate(`/searchmovies?q=${keyword}`); //내가 입력한 값으로 url변경
+    setkeyword("");
   };
 
   // 찜한 리스트 클릭 시 토큰 유효성 검사 후 처리 (axios 사용)
@@ -79,12 +88,15 @@ function Header() {
             <div id="p-name-wrapper">
               {token && <p id="p-name">{name}님의 NETFLIX</p>}
             </div>
-            <Form className="d-flex">
+            {/* 검색기능추가 */}
+            <Form className="d-flex" onSubmit={search}>
               <Form.Control
                 type="search"
                 placeholder="제목, 사람, 장르"
                 className="mx-1 p-2 custom-search"
                 bsPrefix="custom-control"
+                value={keyword}
+                onChange={(event) => setkeyword(event.target.value)}
               />
               <Button variant="outline-danger" id="searchBtn" className="mx-1">
                 <FontAwesomeIcon icon={faSearch} />

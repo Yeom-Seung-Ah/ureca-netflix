@@ -34,7 +34,7 @@
 }
 
 .movie-card:hover .overlay {
-  opacity: 1; /* ✅ hover하면 어두워지게 */
+  opacity: 1; /*  hover하면 어두워지게 */
 }
 
 .overlay-title,
