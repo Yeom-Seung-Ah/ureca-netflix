@@ -1,7 +1,7 @@
-/* 전체 배경 및 글자 스타일 */
+
 body {
-  background-color: #111; /* 검정 배경 */
-  color: #fff; /* 흰색 글자 */
+  background-color: #111; 
+  color: #fff;
 }
 
 /* 영화 상세 정보를 담는 컨테이너 */
@@ -14,12 +14,13 @@ body {
   max-width: 1200px;
   margin: auto;
   flex-wrap: wrap; /* 화면 크기에 따라 컨텐츠가 줄 바꿈을 할 수 있도록 함 */
+  position: relative;
 }
 
 /* 영화 포스터 스타일 */
 .movie-poster {
-  width: 300px; /* 포스터 크기 고정 */
-  height: 400px; /* 비율을 유지하면서 자동으로 높이를 맞춤 */
+  width: 300px; 
+  height: 400px; 
   border-radius: 10px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
 }
@@ -59,4 +60,22 @@ body {
 .movieInfo .popularity {
   margin-top: 10px;
   font-size: 18px;
+}
+
+.back-button {
+  position: absolute;
+  bottom: 20px;  /* 컨테이너 기준 아래 여백 */
+  right: 20px;   /* 컨테이너 기준 오른쪽 여백 */
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.back-button:hover {
+  background-color: rgba(0, 0, 0, 0.9);
 }

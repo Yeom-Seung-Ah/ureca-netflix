@@ -6,8 +6,12 @@ import Loading from '../../utils/Loading';
 import "./MovieDetail.css";
 
 const MovieDetail = () => {
-  const { id } = useParams(); // ✅ URL에서 id 가져오기
+  const { id } = useParams(); // URL에서 id 가져오기
   const [movie, setMovie] = useState(null);
+
+  const Back = () => {
+    window.history.back();
+};
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -36,7 +40,9 @@ const MovieDetail = () => {
   const popularity = movie.popularity.toFixed(1); // 소수점 1자리까지 표시
 
   return (
+    
     <div className="movie-detail-container">
+      
       <img 
         className="movie-poster"
         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} 
@@ -47,7 +53,7 @@ const MovieDetail = () => {
         <h1>{movie.title}</h1>
         <p>{movie.overview}</p>
 
-        {/* 장르, 예산, 개봉일, 평점, 인기도 표시 */}
+        
         <p><strong>장르:</strong> {genres}</p>
         <p><strong>예산:</strong> {budget} 원</p>
         <p><strong>개봉일:</strong> {releaseDate}</p>
@@ -77,6 +83,7 @@ const MovieDetail = () => {
           <p><strong>태그라인:</strong> {movie.tagline}</p>
         )}
       </div>
+      <button className="back-button" onClick={Back}>뒤로 가기</button>
     </div>
   );
 };
